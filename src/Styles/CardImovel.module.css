@@ -1,0 +1,157 @@
+/* Estilo do card principal (sem mudanças) */
+.card {
+  background-color: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  position: relative; /* Adicionado para contexto de posicionamento */
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Container da imagem */
+.imagemContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+.imagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tag "Chegou hoje" (adicionado z-index) */
+.tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #fff;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 10; /* Garante que fique acima do carrossel */
+}
+
+/* Botão de favorito (coração) (adicionado z-index) */
+.botaoFavorito {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+  transition: color 0.3s ease;
+  z-index: 10; /* Garante que fique acima do carrossel */
+}
+.botaoFavorito:hover {
+  color: #ff4d4d;
+}
+
+/* --- ESTILOS PARA O SWIPER DENTRO DO CARD --- */
+
+.swiperContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Setas de navegação (próximo/anterior) */
+.swiperContainer :global(.swiper-button-next),
+.swiperContainer :global(.swiper-button-prev) {
+  color: #ffffff;
+  /* Esconde as setas por padrão */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Mostra as setas quando o mouse está sobre o card */
+.card:hover .swiperContainer :global(.swiper-button-next),
+.card:hover .swiperContainer :global(.swiper-button-prev) {
+  opacity: 1;
+}
+
+.swiperContainer :global(.swiper-button-next)::after,
+.swiperContainer :global(.swiper-button-prev)::after {
+  font-size: 1.2rem; /* Tamanho do ícone da seta */
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 8px 12px;
+  border-radius: 50%;
+}
+
+/* Paginação (bolinhas) */
+.swiperContainer :global(.swiper-pagination-bullet) {
+  background: #ffffff;
+  opacity: 0.6;
+}
+.swiperContainer :global(.swiper-pagination-bullet-active) {
+  opacity: 1;
+}
+
+
+/* ... O resto dos estilos (.infoContainer, etc) continua o mesmo ... */
+
+.infoContainer {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.tipo {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.preco {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 0;
+}
+.endereco {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+.statsContainer {
+  display: flex;
+  gap: 20px;
+  color: #495057;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.statsContainer span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.botaoContato {
+  width: 50%;
+  padding: .5rem;
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.botaoContato:hover {
+  background-color: #007bff;
+  color: #fff;
+}

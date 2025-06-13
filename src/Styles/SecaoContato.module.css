@@ -1,0 +1,127 @@
+.secao {
+  width: 100%;
+  padding: 60px 20px;
+  background-color: #fff;
+  font-family: sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tituloSecao {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #1a1a1a;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.subtituloSecao {
+  text-align: center;
+  font-size: 1rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto 50px auto;
+}
+
+/* Layout de 2 colunas */
+.layoutContainer {
+  display: grid;
+  gap: 40px;
+  /* Uma coluna por padrão (mobile) */
+  grid-template-columns: 1fr;
+}
+
+/* Duas colunas em telas maiores */
+@media(min-width: 992px) {
+  .layoutContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.colunaFormulario, .colunaMapa {
+  width: 100%;
+}
+
+/* Informações de Contato (endereço, etc) */
+.infoContato {
+  margin-bottom: 30px;
+}
+.infoContato h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+.infoContato ul {
+  list-style: none;
+  padding: 0;
+}
+.infoContato li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #495057;
+}
+.infoContato li svg {
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+
+/* Formulário */
+.formulario {
+  width: 100%;
+}
+.campoForm {
+  margin-bottom: 20px;
+}
+.campoForm label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #495057;
+}
+.campoForm input,
+.campoForm textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.campoForm input:focus,
+.campoForm textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.botaoEnviar {
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.botaoEnviar:hover {
+  background-color: #0056b3;
+}
+
+
+/* Mapa Responsivo */
+.mapa {
+  width: 100%;
+  height: 100%;
+  min-height: 400px; /* Garante uma altura mínima no mobile */
+  border-radius: 8px;
+}

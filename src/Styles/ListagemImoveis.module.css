@@ -1,0 +1,49 @@
+.secaoListagem {
+  width: 100%;
+  padding: 40px 20px;
+  background-color: #fff;
+  font-family: sans-serif;
+}
+
+.tituloSecao {
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+  font-size: 2rem;
+  color: #1a1a1a;
+}
+
+/* O container que vai alinhar os cards */
+.gridContainer {
+  display: grid;
+  /* Por padrão (mobile-first), os cards ficam em 1 coluna */
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Media Queries para Responsividade --- */
+
+/* Para telas um pouco maiores que celulares (ex: tablets na vertical) */
+@media (min-width: 600px) {
+  .gridContainer {
+    /* Exibimos 2 colunas */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Para telas de tablets na horizontal e desktops pequenos */
+@media (min-width: 900px) {
+  .gridContainer {
+    /* Podemos usar 3 colunas aqui como transição */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Para telas grandes (desktops), onde as 4 colunas se encaixam bem */
+@media (min-width: 1200px) {
+  .gridContainer {
+    /* Finalmente, as 4 colunas que você pediu! */
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

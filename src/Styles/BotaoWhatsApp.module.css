@@ -1,0 +1,52 @@
+/* Animação de pulso para chamar a atenção */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Estilo do botão principal */
+.botaoFlutuante {
+  /* Posicionamento Fixo */
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000; /* Garante que fique acima de tudo */
+  
+  /* Aparência */
+  background-color: #25D366; /* Cor oficial do WhatsApp */
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Deixa o botão redondo */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  
+  /* Centralização do Ícone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Animação e Transição */
+  animation: pulse 2.5s infinite;
+  transition: transform 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.botaoFlutuante:hover {
+  transform: scale(1.1);
+  animation-play-state: paused; /* Pausa a animação de pulso no hover */
+}
+
+/* Estilo do ícone */
+.icone {
+  font-size: 2rem; /* Tamanho do ícone de WhatsApp */
+}

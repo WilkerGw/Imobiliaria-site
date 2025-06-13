@@ -1,0 +1,166 @@
+/* Estilo para travar o scroll da página quando o menu mobile está aberto */
+/* Esta é uma classe global que será adicionada ao <body> via JS */
+:global(body.menuOpen) {
+  overflow: hidden;
+}
+
+/* Estilo principal do Header */
+.header {
+  /* Efeito de vidro fosco para navegadores que suportam */
+  background-color: rgba(245, 245, 245, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Para Safari */
+  
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 0.8rem 0; /* Aumenta um pouco a altura */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+/* Container para alinhar o conteúdo */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem; /* Mais espaçamento lateral */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Estilo do Logo */
+.logoLink {
+  display: flex;
+  align-items: center;
+  z-index: 10; /* Garante que o logo fique acima do menu mobile */
+}
+
+.logo {
+  width: 4rem;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* --- Estilos de Navegação (Base para Mobile e Desktop) --- */
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  padding-bottom: 5px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Efeito de sublinhado animado no hover */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff; /* Cor de destaque */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.navLink:hover {
+  color: #007bff;
+}
+
+/* Estilo do Link Ativo */
+.activeLink {
+  color: #007bff !important; /* Cor de destaque para o link ativo */
+  font-weight: 700;
+}
+
+/* Botão Hambúrguer */
+.menuHamburguer {
+  display: none; /* Escondido por padrão no desktop */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0.5rem;
+}
+
+.linha {
+  width: 1.7rem;
+  height: 2px;
+  background: #333;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  margin: 5px 0;
+}
+
+/* Animação do botão para "X" */
+.linha1Aberta {
+  transform: translateY(7px) rotate(45deg);
+}
+.linha2Aberta {
+  opacity: 0;
+}
+.linha3Aberta {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Media Query para Responsividade (Telas menores que 768px) --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .menuHamburguer {
+    display: block; /* Mostra o botão no mobile */
+  }
+
+  /* Estilos do menu quando estiver fechado no mobile */
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%; /* Ocupa 80% da largura da tela */
+    height: 100vh;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    
+    background-color: #ffffff;
+    
+    transform: translateX(100%); /* Começa fora da tela */
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  }
+  
+  /* Estilos do menu quando estiver aberto no mobile */
+  .navOpen {
+    transform: translateX(0);
+  }
+  
+  .navLink {
+    font-size: 1.5rem; /* Fonte maior para melhor toque */
+    color: #333;
+  }
+}
