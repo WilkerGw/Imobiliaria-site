@@ -5,6 +5,10 @@
   font-family: sans-serif;
 }
 
+body.menuOpen {
+  overflow: hidden;
+}
+
 section {
   width: 100%;
   min-height: 100vh;

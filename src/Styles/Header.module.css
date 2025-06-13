@@ -1,18 +1,15 @@
-/* Estilo para travar o scroll da página quando o menu mobile está aberto */
-/* Esta é uma classe global que será adicionada ao <body> via JS */
+/* Adicione esta classe globalmente ou no seu CSS principal (ex: globals.css) */
 :global(body.menuOpen) {
   overflow: hidden;
 }
 
 /* Estilo principal do Header */
 .header {
-  /* Efeito de vidro fosco para navegadores que suportam */
   background-color: rgba(245, 245, 245, 0.8);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Para Safari */
-  
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  padding: 0.8rem 0; /* Aumenta um pouco a altura */
+  padding: 0.8rem 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,21 +18,19 @@
   transition: background-color 0.3s ease;
 }
 
-/* Container para alinhar o conteúdo */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem; /* Mais espaçamento lateral */
+  padding: 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Estilo do Logo */
 .logoLink {
   display: flex;
   align-items: center;
-  z-index: 10; /* Garante que o logo fique acima do menu mobile */
+  z-index: 10;
 }
 
 .logo {
@@ -48,54 +43,144 @@
   transform: scale(1.05);
 }
 
-/* --- Estilos de Navegação (Base para Mobile e Desktop) --- */
+/* --- Estilos de Navegação --- */
 .nav {
   display: flex;
   gap: 2rem;
+  align-items: center;
+}
+
+.navItem {
+  position: relative;
 }
 
 .navLink {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: #333;
   font-weight: 500;
   font-size: 1rem;
-  padding-bottom: 5px;
+  padding: 1rem 0.2rem;
   position: relative;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
-/* Efeito de sublinhado animado no hover */
 .navLink::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 0.8rem;
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #007bff; /* Cor de destaque */
+  background-color: #007bff;
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-out;
 }
 
-.navLink:hover::after {
+.navLinkContainer:hover .navLink::after,
+.navLinkContainer.activeLink .navLink::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
 
-.navLink:hover {
+.navLinkContainer:hover .navLink,
+.navLinkContainer.activeLink .navLink {
   color: #007bff;
 }
 
-/* Estilo do Link Ativo */
-.activeLink {
-  color: #007bff !important; /* Cor de destaque para o link ativo */
-  font-weight: 700;
+/* --- Estilos para o Ícone SVG --- */
+.dropdownIcon {
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  color: #666;
+  transition: transform 0.3s ease;
 }
 
-/* Botão Hambúrguer */
+.navLinkContainer:hover .dropdownIcon {
+  color: #007bff;
+}
+
+.navItem:hover .dropdownIcon {
+  transform: rotate(180deg);
+}
+
+
+/* --- Dropdown no Desktop (VERSÃO MELHORADA) --- */
+.dropdownDesktop {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem 0;
+  min-width: 220px;
+  z-index: 1100;
+  opacity: 0;
+  transform: translateY(10px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.navItem:hover .dropdownDesktop {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 0.7rem 1.5rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.dropdownLink:hover {
+  background-color: #f5f5f5;
+  color: #007bff;
+}
+
+/* Regra para esconder o dropdown mobile no desktop */
+.dropdownMobile {
+  display: none;
+}
+
+
+/* --- Container de Ações (Login e Hambúrguer) --- */
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loginButton {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
 .menuHamburguer {
-  display: none; /* Escondido por padrão no desktop */
+  display: none;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -112,55 +197,144 @@
   margin: 5px 0;
 }
 
-/* Animação do botão para "X" */
-.linha1Aberta {
-  transform: translateY(7px) rotate(45deg);
-}
-.linha2Aberta {
-  opacity: 0;
-}
-.linha3Aberta {
-  transform: translateY(-7px) rotate(-45deg);
-}
+.linha1Aberta { transform: translateY(7px) rotate(45deg); }
+.linha2Aberta { opacity: 0; }
+.linha3Aberta { transform: translateY(-7px) rotate(-45deg); }
 
-/* --- Media Query para Responsividade (Telas menores que 768px) --- */
-@media (max-width: 768px) {
+.mobileOnlyActions { display: none; }
+.desktopOnly { display: flex; }
+
+
+/* --- Media Query para Responsividade (Telas menores que 992px) --- */
+@media (max-width: 992px) {
   .container {
     padding: 0 1rem;
   }
   
-  .menuHamburguer {
-    display: block; /* Mostra o botão no mobile */
-  }
+  .menuHamburguer { display: block; }
+  .desktopOnly { display: none; } 
+  
+  /* Esconde o dropdown de desktop no mobile */
+  .dropdownDesktop { display: none; }
 
-  /* Estilos do menu quando estiver fechado no mobile */
   .nav {
     position: fixed;
     top: 0;
     right: 0;
-    width: 80%; /* Ocupa 80% da largura da tela */
+    width: 85%;
+    max-width: 320px;
     height: 100vh;
-    
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0; 
     background-color: #ffffff;
-    
-    transform: translateX(100%); /* Começa fora da tela */
+    transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-    
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    padding: 6rem 0 2rem;
+    overflow-y: auto;
   }
   
-  /* Estilos do menu quando estiver aberto no mobile */
   .navOpen {
     transform: translateX(0);
   }
+
+  .navItem {
+    width: 100%;
+    text-align: left;
+    padding: 0 1.5rem;
+  }
   
+  .navItem:hover .dropdownIcon {
+    transform: none;
+  }
+
+  .navLinkContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    padding: 0.6rem 1rem;
+  }
+
+  .navLinkContainer.activeLink {
+    background-color: #e7f1ff; 
+  }
+
   .navLink {
-    font-size: 1.5rem; /* Fonte maior para melhor toque */
+    width: 100%;
+    padding: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: #333;
+  }
+
+  .navLink::after {
+    display: none;
+  }
+
+  .navLinkContainer.activeLink .navLink,
+  .navLinkContainer.activeLink .dropdownIcon {
+    color: #0056b3;
+    font-weight: 700;
+  }
+  
+  .dropdownIcon {
+    color: #007bff;
+    margin-left: auto;
+  }
+
+  .iconOpen {
+    transform: rotate(180deg);
+  }
+  
+  /* --- Dropdown no Mobile --- */
+  .dropdownMobile {
+    display: block; /* <<< CORREÇÃO AQUI */
+    background-color: transparent;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    width: 100%;
+    padding: 0 1rem;
+    margin-top: 0;
+    border-radius: 0;
+    border-left: 2px solid #007bff;
+    margin-left: 1rem;
+  }
+
+  .dropdownMobileOpen {
+    max-height: 500px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .dropdownLinkMobile {
+    display: block;
+    padding: 0.6rem 0.5rem;
+    font-size: 1rem;
+    color: #555;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .dropdownLinkMobile:hover,
+  .dropdownLinkMobile:focus {
+      background-color: #e9e9e9;
+      color: #007bff;
+  }
+  
+  .mobileOnlyActions {
+    display: block;
+    margin-top: auto;
+    padding: 2rem 1.5rem;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #eee;
   }
 }

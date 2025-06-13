@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import CardImovel from "./CardImovel";
 import styles from "../Styles/ListagemImoveis.module.css";
 
 // --- Dados Fictícios (Mock) COMPLETOS com 8 imóveis e 5 imagens cada ---
+// Um imóvel foi atualizado para o tipo "Loft" para o filtro funcionar
 const imoveisMock = [
   {
     id: 1,
@@ -95,10 +96,10 @@ const imoveisMock = [
       "https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=800&auto=format&fit=crop",
     ],
     tag: null,
-    tipo: "Studio",
-    preco: 320000,
+    tipo: "Loft", // <-- ATUALIZADO para "Loft"
+    preco: 410000,
     endereco: "Rua da Consolação, República",
-    area: 45,
+    area: 75, // Área aumentada para fazer sentido com o filtro "A partir de 70 m²"
     quartos: 1,
   },
   {
@@ -135,14 +136,64 @@ const imoveisMock = [
   },
 ];
 
+const filtros = [
+  "Novidades",
+  "3 Quartos",
+  "A partir de 70 m²",
+  "Propriedades Real",
+  "Preço abaixo do mercado",
+];
+
 function ListagemImoveis() {
+  const [filtroAtivo, setFiltroAtivo] = useState("Novidades");
+
+  const imoveisFiltrados = imoveisMock.filter((imovel) => {
+    switch (filtroAtivo) {
+      case "Novidades":
+        return imovel.tag === "Chegou hoje";
+      case "3 Quartos":
+        return imovel.quartos === 3;
+      case "A partir de 70 m²":
+        return imovel.area >= 70;
+      case "Propriedades Loft":
+        return imovel.tipo === "Loft";
+      case "Preço abaixo do mercado":
+        return imovel.tag === "Oportunidade";
+      default:
+        return true; // Caso padrão, não filtra nada
+    }
+  });
+
   return (
     <section className={styles.secaoListagem} id="imoveis">
-      <h2 className={styles.tituloSecao}>Oportunidades para você</h2>
-      <div className={styles.gridContainer}>
-        {imoveisMock.map((imovel) => (
-          <CardImovel key={imovel.id} imovel={imovel} />
-        ))}
+      <div className={styles.conteudoMaximo}>
+        <h2 className={styles.tituloSecao}>Oportunidades para você</h2>
+
+        {/* --- BARRA DE FILTROS --- */}
+        <div className={styles.filtroContainer}>
+          {filtros.map((filtro) => (
+            <button
+              key={filtro}
+              className={filtro === filtroAtivo ? styles.filtroAtivo : styles.filtro}
+              onClick={() => setFiltroAtivo(filtro)}
+            >
+              {filtro}
+            </button>
+          ))}
+        </div>
+
+        {/* --- GRID DE IMÓVEIS --- */}
+        <div className={styles.gridContainer}>
+          {imoveisFiltrados.length > 0 ? (
+            imoveisFiltrados.map((imovel) => (
+              <CardImovel key={imovel.id} imovel={imovel} />
+            ))
+          ) : (
+            <p className={styles.nenhumImovel}>
+              Nenhum imóvel encontrado para o filtro selecionado.
+            </p>
+          )}
+        </div>
       </div>
     </section>
   );

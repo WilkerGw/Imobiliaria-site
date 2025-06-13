@@ -5,45 +5,84 @@
   font-family: sans-serif;
 }
 
-.tituloSecao {
+/* Container para alinhar título e filtros */
+.conteudoMaximo {
   max-width: 1200px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto;
+}
+
+.tituloSecao {
+  margin: 0 0 20px 0; /* Ajuste na margem */
   font-size: 2rem;
   color: #1a1a1a;
+}
+
+/* --- ESTILOS DO FILTRO --- */
+.filtroContainer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  overflow-x: auto; /* Para rolagem horizontal em telas pequenas */
+}
+
+.filtro {
+  padding: 4px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap; /* Evita que o texto quebre */
+  border-bottom: 3px solid transparent; /* Espaço para a borda ativa */
+  transition: color 0.2s ease-in-out;
+}
+
+.filtro:hover {
+  color: #1a1a1a;
+}
+
+.filtroAtivo {
+  composes: filtro; /* Herda os estilos de .filtro */
+  color: #1a1a1a;
+  font-weight: 600;
+  border-bottom: 3px solid #007bff; /* azul */
 }
 
 /* O container que vai alinhar os cards */
 .gridContainer {
   display: grid;
-  /* Por padrão (mobile-first), os cards ficam em 1 coluna */
   grid-template-columns: 1fr;
   gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
+}
+
+/* Mensagem para quando não houver imóveis */
+.nenhumImovel {
+  grid-column: 1 / -1; /* Ocupa todas as colunas do grid */
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 1.1rem;
 }
 
 /* --- Media Queries para Responsividade --- */
-
-/* Para telas um pouco maiores que celulares (ex: tablets na vertical) */
 @media (min-width: 600px) {
   .gridContainer {
-    /* Exibimos 2 colunas */
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Para telas de tablets na horizontal e desktops pequenos */
 @media (min-width: 900px) {
   .gridContainer {
-    /* Podemos usar 3 colunas aqui como transição */
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Para telas grandes (desktops), onde as 4 colunas se encaixam bem */
 @media (min-width: 1200px) {
   .gridContainer {
-    /* Finalmente, as 4 colunas que você pediu! */
     grid-template-columns: repeat(4, 1fr);
   }
 }
